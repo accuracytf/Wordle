@@ -1,7 +1,7 @@
 var activeRow = 1;
 var activeSquare = 1;
 
-var rightWord = "RIGHT"
+var rightWord = "HELLO"
 const correct = rightWord.split("");
 console.log(correct);
 
