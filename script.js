@@ -1,9 +1,25 @@
 var activeRow = 1;
 var activeSquare = 1;
 
-var rightWord = "HELLO"
-const correct = rightWord.split("");
-console.log(correct);
+var rightWord = "RIGHT"
+var wrongsChars = [];
+const correctWord = rightWord.split("");
+console.log(correctWord);
+
+
+const correctWordMap = new Map();
+for(let i = 0; i <= 4; i++){
+    
+    correctWordMap.set(correctWord[i], 1)
+}
+
+
+const guessedWordMap = new Map();
+
+
+
+
+
 
 function Key(letter){
     console.log(activeSquare);
@@ -55,13 +71,13 @@ function Enter(){
         console.log(guessSplit);
         for(let i = 1;i <= 5;i++){
             var yellow=false;
-            if(guessSplit[i-1] == correct[i-1]){
+            if(guessSplit[i-1] == correctWord[i-1]){
                 let element = document.getElementById(i + "-" + activeRow);
                 element.style.backgroundColor = "green";
             }
             else{
                 for(let j = 1;j <= 5;j++){
-                    if(guessSplit[i-1]==correct[j-1]){
+                    if(guessSplit[i-1]==correctWord[j-1]){
                         yellow=true;
                     }      
                 }
@@ -71,6 +87,8 @@ function Enter(){
                 }
                 else{
                     element.style.backgroundColor = "gray";
+                    wrongsChars.push(guessSplit[i-1]);
+                    console.log(wrongsChars);
                 }
                     
             }
@@ -78,7 +96,6 @@ function Enter(){
               
         }
         if(guess==rightWord){
-            correctGuess();
             console.log("rätt");
         }
         activeCheck(true);
@@ -87,7 +104,11 @@ function Enter(){
         activeCheck(false); 
     }
         
-    
+    wrongsChars.forEach(char => {
+        const el = document.getElementById(char);
+        console.log(el);
+        el.style.backgroundColor = "gray";
+    });
     
 
 }
@@ -103,6 +124,3 @@ function activeCheck(newRow){
     }
 }
 
-function correctGuess(){
-    alert("correct");
-}
